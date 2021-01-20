@@ -1,0 +1,181 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts, amsmath, amssymb}
+\usepackage[english]{babel}
+% \usepackage{boisik}
+\usepackage{amsthm}
+\usepackage[margin=0.5in]{geometry}
+
+%\usepackage{tgbonum}
+%\usepackage{cmbright}
+%\usepackage{textcomp}
+\usepackage[object=am]{pgfornament}
+\usepackage{tikz-cd}
+
+\theoremstyle{definition}
+\newtheorem{definition}{$\boxed{\star}$ Definition}
+\newcommand{\tit}[1]{\textit{#1}}
+\newtheorem{theorem}{$\boxed{\boxed{\circledast}}$ Theorem}
+
+\newcommand{\nll}[0]{\newline\newline}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{corollary}{$ \to $ Corollary}
+
+\theoremstyle{definition}
+\newtheorem{proposition}{$\checkmark$ Proposition}
+
+\newenvironment{customproof}[1]{\paragraph{Answer #1:}}{\hfill\ensuremath{\blacksquare}}
+\newcommand{\ans}[1]{\textbf{Answer #1}}
+
+
+\title{Abstract Algebra \large\\
+	 Solution to selected problems }
+\author{Animesh Renanse}
+\date{\today}
+\usepackage{amsthm}
+
+\newcommand{\intrs}{\cap}
+
+\newcommand{\abs}[1]{\left\vert #1\right\vert}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\gen}[1]{\left\langle #1\right\rangle}
+\newcommand{\order}[1]{\left\vert #1 \right\vert}
+\newcommand{\image}[0]{\text{Im }}
+\newcommand{\kernel}[0]{\text{Ker }}
+\newcommand{\nsg}[0]{\trianglelefteq}
+\newcommand{\isomorph}{\cong}
+\newcommand{\End}[1]{\text{\textbf{End}}\left(#1\right)}
+\newcommand{\Auto}[1]{\text{\textbf{Aut}}\left(#1\right)}
+\newcommand{\groupINT}[0]{\mathbb{Z}}
+
+\renewcommand{\qedsymbol}{\ensuremath{\blacksquare}}
+
+
+\begin{document}
+	
+	\maketitle
+	\begin{customproof}{I.2.2}
+		Let $ S $ be a \emph{finite semigroup} and cancellation law holds for it's elements, that is, 
+		\begin{equation}
+			\begin{split}
+				x\cdot y = x\cdot z &\implies y = z \\
+				y\cdot x = z \cdot x & \implies y=z
+			\end{split}
+		\end{equation}  
+		Since $ S $ is a semigroup, hence it is already associative. Consider $ x^n = x\cdot x\cdot \; \dots \;\cdot x \in S$ for all $ n\ge 0 $. But since $ S $ is finite, thus $ \exists m \neq n $ such that $ x^n = x^m $. Now by cancellation law, we get (assuming WLOG that $ n>m $)
+		\[x^{n-m} = 1.\]
+		Since $ n-m>0 $, hence $ x^{n-m} = 1 \in S $. Now, consider $ y\in S $ such that $ y\cdot x^n = 1 $, hence,
+		\begin{equation}
+			\begin{split}
+				y\cdot x^n &= 1\\
+				y\cdot x^n&= x^{n-m}\\
+				y\cdot x^m &= 1 = y\cdot x^n\;\;\text{(Cancellation Law)}
+			\end{split}
+		\end{equation} 
+		Hence, $ y $ is the inverse element of $ x^n $. Thus we finally have $ S $ as a group.
+	\end{customproof}
+
+\hrulefill
+\begin{customproof}{I.3.14}
+	Let $ G $ be a group with the two left cosets of $ H\le G $ and $ K\le G $. We need to show that intersection of these left cosets is either empty or an another left coset of $ H \intrs K $. Let $ x,y \in G $. Consider the left coset of $ H $ as $ x\cdot H $ and left coset of $ K $ as $ y\cdot K $. Moreover, consider now the intersection of $ x\cdot H $ and $ y\cdot K $, $ x \cdot H \intrs y\cdot K  $. Let $ z \in x \cdot H \intrs y\cdot K $. Therefore $ z \in x\cdot H $ and $ z\in  y\cdot K  $. This implies that $ z = x\cdot h $ for some $ h\in H $, similarly, $ z = y\cdot k $ for some $ k \in K $. Hence $ x\cdot h = y\cdot k \implies \inv{h}\cdot \inv{x}\cdot y\cdot k = (\inv{h}\cdot k)\cdot (\inv{x}\cdot y) =1 = (\inv{y}\cdot x)\cdot (\inv{k}\cdot h)$. Since $ x,y\in G \implies \inv{x}\cdot y$ and $ \inv{y}\cdot x $ is in $ G $, therefore either $ z = \Phi $ or if $ H\intrs K \neq \Phi$ then since $ H\intrs K $ is again a subgroup which implies $ h\cdot \inv{k} \in H\intrs K $ where $ h,k \in H\intrs K $, we get that $ z $ is in left coset of $ H\intrs K $.
+\end{customproof}
+
+\hrulefill
+\begin{customproof}{I.5.1}
+	\emph{Given} : $ \varphi : A\to B $, $ \psi : A \to C $ are homomorphisms on groups. \\
+	Let $ \psi $ be surjective and $ \kernel \psi \subseteq \kernel \varphi $. With this, we need to show the following (for some unique homomorphism $ \sigma: C\to B $):
+	\[1:\;\begin{tikzcd}
+		A \arrow{r}{\psi} \arrow[swap]{dr}{\varphi} &C\arrow[dashed]{d}{\sigma}\\
+		&B 
+	\end{tikzcd}\]	
+We know that $ K = \kernel \psi \nsg A $ (Proposition 19) and $ K \subseteq \kernel\varphi $. Now by Factorization (Theorem 1) we have that $ \varphi $ can be factored via the canonical map uniquely as $ \varphi = \rho\circ \pi $ as :
+\[2: \;\begin{tikzcd}
+	A \arrow{dr}{\varphi}\arrow{d}{\psi}\arrow{r}{\pi} &A/\kernel \psi \arrow[dashed]{d}{\rho} \\
+	C&B 
+\end{tikzcd}\]
+Now using Homomorphism theorem (Theorem 2), we see that $ A/\kernel \psi \isomorph \image\psi = C$ as $ \psi $ is surjective where this isomorphism is unique. We hence complete the diagram as follows:
+\[3:\;\begin{tikzcd}
+	A \arrow[swap]{d}{\psi}\arrow{r}{\pi} &A/\kernel \psi \arrow[dashed,swap]{dl}{\tau} \arrow[dashed]{d}{\rho} \\
+	C\arrow[dashed,swap]{r}{\inv{\tau}\circ \rho}&B 
+\end{tikzcd} \]
+That is, since $ \tau $ is a unique isomorphism by Theorem 2 and $ \rho $ is a unique homomorphism by Theorem 1, we get that $ \sigma =\inv{\tau}\circ \rho $ would again be a unique homomorphism (Proposition 21).\\\\
+Conversely, we have the Diagram 1 with us, and the fact that $ \psi $ is surjective with $ \varphi = \sigma \circ \psi $, we hence need to show that $ \kernel \psi \subseteq \kernel \varphi $. 
+First note that $ \kernel \psi = \inv{\psi}(1_C) $ and $ \kernel \varphi = \inv{\varphi}(1_B) $. Let $ a_\psi \in \kernel \psi$ and $ a_\varphi \in \kernel \varphi $. Since $ \varphi = \sigma \circ \psi $, hence $ \inv{\varphi} = \inv{\psi}\circ \inv{\sigma} $. Therefore, $ \kernel \varphi = \inv{\psi}\circ \inv{\sigma}(1_B) $. Since $ \sigma $ is a homomorphism, hence $1_C \subseteq \kernel \sigma = \inv{\sigma}(1_B)$. Hence, $ \kernel\psi = \inv{\psi} (1_C) \subseteq \inv{\psi} \circ \inv{\sigma}(1_B) = \inv{\varphi}(1_B) = \kernel \varphi $.
+\end{customproof}
+
+\hrulefill
+\begin{customproof}{I.5.2}
+	\emph{Given} : $ 1_{2\mathbb{Z}} : 2\mathbb{Z} \to 2\mathbb{Z} $ is a homomorphism and $ \iota : 2\mathbb{Z} \to \mathbb{Z} $ is also a homomorphism. Groups $ 2\groupINT, \groupINT $ are under addition.\\
+	Assume that $ 1_{2\mathbb{Z}} $ can be factored via the inclusion map $ \iota $. That means that there is a homomorphism $ \varphi :  \groupINT : \mathbb{Z} \to 2\mathbb{Z}$ such that $ 1_{2\mathbb{Z}} = \varphi \circ \iota $, represented as:
+	\[\begin{tikzcd}
+		2\groupINT\arrow[swap]{d}{\iota} \arrow{r}{1_{2\groupINT}} &2\groupINT\\
+		\groupINT \arrow[swap]{ur}{\varphi}
+	\end{tikzcd}\]
+By Homomorphism (Theorem 2), we have that $ 2\groupINT/\kernel1_{2\groupINT} \isomorph \image 1_{2\groupINT} = 2\groupINT $. But since $ \kernel 1_{2\groupINT} = \{0\} $, hence it implies that $ A/\kernel 1_{2\groupINT} = 2\groupINT/\{0\} = \{0\} $. Which leads to the contradiction that $ \{0\} \isomorph 2\groupINT $.
+\end{customproof}
+
+\hrulefill
+\begin{customproof}{I.5.3}
+	\emph{Given} : $ \varphi : A \to C $ and $ \psi : B\to C $ are homomorphisms. Also $ \psi $ is injective.\\
+	Let $ \varphi = \psi \circ \chi $, that is, $ \varphi $ is factored via $ \psi $ and $ \chi $ where $ \chi : A \to B $ is a unique homomorphism. This means that we have the following situation:
+	\[1 :\;\begin{tikzcd}
+		A \arrow[swap]{d}{\varphi} \arrow[dashed]{r}{\chi} &B \arrow{ld}{\psi}\\
+		C
+	\end{tikzcd}\]
+Using Homomorphism (Theorem 2) on $ \varphi $ and $ \psi $, we get that $ \varphi =  \iota_1 \circ \theta_1 \circ \pi_1$ and $ \psi = \iota_2 \circ \theta_2 \circ \pi_2 $ as follows:
+	\[2 :\;\begin{tikzcd}
+A/\kernel \varphi \arrow[swap,dashed]{d}{\theta_1}	&A\arrow[swap]{l}{\pi_1} \arrow[swap]{d}{\varphi} \arrow[dashed]{r}{\chi}&B \arrow{ld}{\psi} \arrow{dr}{\pi_2}\\
+\image \varphi \arrow[swap]{r}{\iota_1}	&C & &B/\kernel \psi \arrow[dashed]{dl}{\theta_2} \\
+&&\image \psi \arrow{ul}{\iota_2}
+\end{tikzcd}\]
+Take any $ c\in \image \varphi $ which is also in $ C $. Assume that $ c\not \in \image \psi $. Since $ \theta_1$ is an isomorphism (so a bijection), hence $ \inv{\theta_1}(c) \in A/\kernel\varphi $. Since $ \pi_1 $ is a canonical projection which is surjective homomorphism (Proposition 23), hence $ \inv{\pi_1}\circ \inv{\theta_1}\circ \inv{\iota_1}(c) = \inv{\varphi}(c) = a_1\in A $. Now $ \chi(a_1) \subseteq B $. But since $ \psi $ is injective, hence for all $ b\in B $, there exists unique element in $ C $. Hence $ \psi(\chi(a_1)) = \psi\circ \chi (a_1) = \varphi(a_1) = \varphi\circ \inv{\varphi}  (c) = c \in \image\psi$ which is a contradiction.\\\\
+Conversely, assume that $ \image \varphi \subseteq \image \psi $ with $ \psi $ being injective. We need to show that Diagram 1 is true. Theorem 2 leads us to Diagram 2 above without the homomorphism $ \chi : A \to B $. Since $ \image \varphi \subseteq \image \psi $, hence for any $ c \in  \image \varphi $, $ c\in \image \psi $, which implies that there exists a inclusion homomorphism $ \tau : \image \varphi \to \image \psi $ because both $ \image \varphi,\image \psi \subseteq C $. Since $ \psi $ is injective, it means that for each $ b\in B $, we have a distinct $ \psi(b)\in C $. Hence, $ \kernel \psi = \inv{\psi}(1_C) = 1_B $. Therefore $ B/\kernel\psi = B/1_B = B$. Therefore, $ \pi_2 $ becomes a identity mapping from $ B $ to $ B $. We can now form the homomorphism $ \chi $ as the following composition, $ \chi =  \inv{\theta_2}\circ\tau\circ\theta_1\circ\pi_1 : A \to B$. Note that $ \theta_1 $ and $ \theta_2 $ are unique isomorphisms, courtesy of Theorem 2. Hence $ \chi $ is also unique.
+
+\end{customproof}
+
+\hrulefill
+\begin{customproof}{I.5.4}
+	Consider the homomorphism (as $ \mathbb{R} $ is an additive group) $ \psi : \mathbb{R} \to \mathbb{C} $ such that $ \psi(\theta) = e^{i2\pi \theta} $. Clearly, $ \abs{\psi(\theta)} = 1$ so $ \psi $ maps to complex numbers of modulus 1. Note that $ \kernel \psi = \mathbb{Z} $. Hence by Homomorphism (Theorem 2) we get that $ \mathbb{R}/\kernel \psi = \mathbb{R}/\mathbb{Z} \isomorph \mathbb{C}_1 $ where $ \mathbb{C}_1 $ is the multiplicative group of all complex numbers of modulus 1.
+\end{customproof}
+
+\hrulefill
+\newpage
+\begin{customproof}{II.3.10}
+	We have $ x\in G $ and it's centralizer $ C_G(x) $ in $ G $. From this, we need to prove that in the set of all subgroups $ H $ whose center contains $ x $, $ C_G(x) $ is the largest of them.\\
+	We begin by expanding the $ Z(C_G(x)) = \{g^\prime \in C_G(x)\;\vert\; g^\prime\cdot y = y\cdot g^\prime \;\forall\;y\in C_G(x)\}$. This clearly is the set of all those elements of centralizer $ C_G(x) $ which commute with each other. First, it's trivial to see that $ C_G(x) $ is a subgroup of $ G $. Second, we take a larger subgroup $ J\le G $ such that $ x\in Z(J) $ and $ C_G(x) \subseteq J $. Now since $ x\in Z(J) $, this implies that $ x\cdot z = z\cdot x $ for all $ z\in J $. But this implies that $ Z(J) \subseteq C_G(x) $ and since $ J\subseteq Z(J) $, hence $ J\subseteq C_G(x) $. Hence $ J= C_G(x) $. 
+\end{customproof}
+
+\hrulefill
+\begin{customproof}{II.3.13}
+	We have a group $ G $, Group of automorphic functions from $ G $ to $ G $, $ \Auto{G} $ and the center $ Z(G) $. Clearly, $ Z(G) $ is a subgroup itself. Now by definition, any $ \alpha : G\to G $ in $ \Auto{G} $ is a bijective homomorphism. Hence, we can write $ \alpha(Z(G)) = \{\alpha(y)\;\vert\; y\in Z(G)\}$. Now since $ \alpha $ is homomorphic, hence for $ y\in Z(G) $, $ \alpha (y) = \alpha(x\cdot y\cdot\inv{x}) = \alpha(x) \cdot \alpha(y) \inv{(\alpha(x))}$ for all $ x\in G $. Rearranging this leads to the equation that $ \alpha(y)\cdot \alpha(x) = \alpha(x) \cdot \alpha(y) $ for all $ x\in G $ and $ y\in Z(G) $. This implies that $ \alpha(y)\in Z(G) $ because $ \alpha(x) \in G $ is and $ \alpha  $ is bijective. Therefore we have $ \alpha(Z(G)) = Z(G) $, that is, center of a group is a characteristic subgroup.
+\end{customproof}
+
+\hrulefill
+\begin{customproof}{II.3.14}
+	For first part, consider $ C\le N\nsg G $ where $ C $ is a characteristic subgroup. Now note that action of $ G $ by inner automorphism on $ N $. Considering the center of $ N $ as $ Z(N) = \{g\in G\;\vert\;g\cdot N\cdot \inv{g}=N\}$, which is also normal. Since $ C\le N\nsg Z(N) $ and by Proposition 34, we have that $ C\nsg G $.\\\\
+	Second part can be seen easily by noting that the following relation is transitive : $ x \le_C y $ if $ \alpha(x) = x \;\forall\;\alpha \in \Auto{y}$, where $ x\le_C y$ means $ x $ is the characteristic subgroup of $ y $. 
+\end{customproof}
+
+\hrulefill
+\begin{customproof}{II.3.15}
+	We have that $ N\le_C G$, $ N\le K\le G $ with $ K/N \le_C G/N $. We need to prove that $ K\le_C G $. To show this, simply take any $ \alpha \in \Auto{G} $. Note that $ \Auto{G/N} \subseteq \Auto{G} $. Therefore for any pair of $ k_1\cdot N, \;k_2\cdot N\in K/N $, we have $ \alpha(k_1\cdot N\cdot k_2\cdot N) = \alpha(k_1\cdot k_2\cdot N)= \alpha(k_1\cdot k_2)\cdot \alpha(N)  = \alpha(k)\cdot N \in K/N$ where $ \alpha(k)\in K $. Since $ \alpha $ is bijective, therefore $ \alpha(K) = K $ for all $ \alpha\in \Auto{G} $. Hence $ K\le_C G $.
+\end{customproof}
+
+\hrulefill
+\begin{customproof}{III.1.3}
+	Assume a $ w \in R $ such that $ w\cdot u = u\cdot w = 1_R $ on top of the given fact that $ \exists u\in R $ such that $ u\cdot v = v\cdot u = 1_R $ for some $ v\in R $. Now we simply assume that $ w-v\neq 0_R $. Note that if $ u= 0_R $, then $ R = \{0_R,1_R\} $ under given conditions (one would get $ 0_R = 1_R $) and then only such pair would be $ 1_R\cdot 1_R = 1_R$. For the other non-trivial case, we have $ u \neq 0_R  $. Therefore by distributive property, we have $ 0_R=u\cdot 0_R \neq u\cdot (w-v) = u\cdot w - u\cdot v = 1_R - 1_R = 0_R $ which is a contradiction. Hence $ w-v = 0 \implies w=v$ so that any \textit{unit} $ v $ is unique for ring $ R $ with identity. \\
+	Showing that the set $ U_R = \{u\in R\;\vert\; u\cdot v=v\cdot u = 1_R\;\text{for some}\;v\in R\} $ is a group is trivial because associativity and identity are ensured by ring structure and by the fact that $ 1_R\in U_R $. Moreover, existence of inverse elements of $ U_R $ is inbuilt of it's definition. 
+\end{customproof}
+
+\hrulefill
+\begin{customproof}{III.1.4}
+	If $ u $ is unit of $ R $ with identity, then $\exists v\in R$ such that $ v\cdot u = u\cdot v = 1_R $. So the second statement follows trivially for $ y=x=v $.\\
+	Conversely, we have $ x\cdot u = u\cdot y = 1_R $ for some $ x,y\in R $. Assume that $ \not\exists z\in R $ such that $ z\cdot u = u \cdot z = 1_R \implies z\cdot(u\cdot z) = u\cdot z^2 \implies z\cdot 1_R = z = u\cdot z^2$. Now note that $ (x\cdot u)\cdot y = u\cdot y^2 = y \implies u\cdot y^2 = y$ which is a contradiction. Therefore $ \exists z\in R $ such that $ z\cdot u = u\cdot z = 1_R $, so $ u $ is unit of $ R $.
+\end{customproof}
+
+\hrulefill
+\end{document}
+

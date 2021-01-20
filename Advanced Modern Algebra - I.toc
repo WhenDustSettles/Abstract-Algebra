@@ -1,0 +1,15 @@
+\babel@toc {english}{}
+\contentsline {section}{\numberline {1}Introduction}{2}{}%
+\contentsline {section}{\numberline {2}Groups}{3}{}%
+\contentsline {subsection}{\numberline {2.1}Semigroups}{3}{}%
+\contentsline {subsection}{\numberline {2.2}Groups}{5}{}%
+\contentsline {subsection}{\numberline {2.3}Subgroups}{7}{}%
+\contentsline {subsection}{\numberline {2.4}Homomorphisms}{9}{}%
+\contentsline {subsection}{\numberline {2.5}The Isomorphism Theorems}{12}{}%
+\contentsline {subsection}{\numberline {2.6}The Direct Products}{15}{}%
+\contentsline {subsection}{\numberline {2.7}Group Actions}{17}{}%
+\contentsline {subsection}{\numberline {2.8}The Sylow Theorems}{20}{}%
+\contentsline {section}{\numberline {3}Rings}{23}{}%
+\contentsline {subsection}{\numberline {3.1}Subrings and Ideals\footnote {\emph {From this section onward, all rings are rings with identity \& all homomorphisms of rings are homomorphisms of rings with identity.}}}{26}{}%
+\contentsline {subsection}{\numberline {3.2}Homomorphisms}{28}{}%
+\contentsline {subsection}{\numberline {3.3}Domains \& Fields}{30}{}%
